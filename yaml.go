@@ -135,9 +135,9 @@ func Unmarshal(in []byte, out interface{}) (err error) {
 //     yaml.Marshal(&T{B: 2}) // Returns "b: 2\n"
 //     yaml.Marshal(&T{F: 1}} // Returns "a: 1\nb: 0\n"
 //
-func Marshal(in interface{}) (out []byte, err error) {
+func MarshalWithIndent(indent int, in interface{}) (out []byte, err error) {
 	defer handleErr(&err)
-	e := newEncoder()
+	e := newEncoder(indent)
 	defer e.destroy()
 	e.marshal("", reflect.ValueOf(in))
 	e.finish()
